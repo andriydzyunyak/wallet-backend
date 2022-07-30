@@ -1,7 +1,7 @@
 const { createError } = require("../../helpers");
 const { User } = require("../../models");
 const bcrypt = require("bcryptjs");
-const { v4: uuidv4 } = require("uuid");
+// const { v4: uuidv4 } = require("uuid");
 
 const register = async (req, res) => {
   const { email, password, name } = req.body;
@@ -9,13 +9,13 @@ const register = async (req, res) => {
   if (user) {
     throw createError(409, "Email in use");
   }
-  const verificationToken = uuidv4();
+  // const verificationToken = uuidv4();
   const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   await User.create({
     email,
     password: hashPassword,
     name,
-    verificationToken,
+    // verificationToken,
   });
 
   res.status(201).json({
@@ -23,7 +23,7 @@ const register = async (req, res) => {
       user: {
         email,
         name,
-        verificationToken,
+        // verificationToken,
       },
     },
   });

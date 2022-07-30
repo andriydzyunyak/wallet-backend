@@ -1,34 +1,34 @@
-const { Schema, model } = require("mongoose");
+// const { Schema, model } = require("mongoose");
 
-const Joi = require("joi");
+// const Joi = require("joi");
 
-const transactionsSchema = Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-    },
-    type: {
-      type: Boolean,
-      default: true,
-    },
-    sum: {
-      type: Number,
-      required: true,
-    },
-    descriptions: {
-      type: String,
-    },
-    date: {
-      type: Date,
-    },
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: "user",
-    },
-  },
-  { versionKey: false, timestamps: true }
-);
+// const transactionsSchema = Schema(
+//   {
+//     name: {
+//       type: String,
+//       required: true,
+//     },
+//     type: {
+//       type: Boolean,
+//       default: true,
+//     },
+//     sum: {
+//       type: Number,
+//       required: true,
+//     },
+//     descriptions: {
+//       type: String,
+//     },
+//     date: {
+//       type: Date,
+//     },
+//     owner: {
+//       type: Schema.Types.ObjectId,
+//       ref: "user",
+//     },
+//   },
+//   { versionKey: false, timestamps: true }
+// );
 
 // const Transaction = model("transaction", transactionsSchema);
 
