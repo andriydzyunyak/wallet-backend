@@ -33,6 +33,7 @@ const transactionsSchema = Schema(
 // const Transaction = model("transaction", transactionsSchema);
 
 // const transactionAddSchema = Joi.object({
+//   date: Joi.date().raw().required(),
 //   name: Joi.string().required(),
 //   email: Joi.string()
 //     .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
