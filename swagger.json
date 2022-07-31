@@ -7,7 +7,7 @@
   },
   "consumes": ["application/json"],
   "produces": ["application/json"],
-  "servers": [{"url":"https://wallet-app-backend-project.herokuapp.com"}, "- API base URL"],
+  "servers": [{"url":"https://wallet-app-backend-project.herokuapp.com"}],
 
   "paths": {
     "/users/register": {
