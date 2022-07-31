@@ -1,59 +1,89 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "2.0.2",
-    "title": "Wallet App",
-    "description": "Showing off swagger-ui-express",
-    "license": {
-      "name": "MIT",
-      "url": "https://opensource.org/licenses/MIT"
-    }
+    "version": "1.0.0",
+    "title": "Wallet API",
+    "description": "Documentations of Wallet API"
   },
   "consumes": ["application/json"],
   "produces": ["application/json"],
-  "servers": [{ "url": "http://localhost:3001" },{"url":"https://wallet-app-backend-project.herokuapp.com"}],
-  "tags": [
-    {
-      "name": "Auth",
-      "description": "Authorization endpoints"
-    }
-  ],
+  "servers": [{ "url": "http://localhost:3001 - API base URL" },{"url":"https://wallet-app-backend-project.herokuapp.com - API base URL"}],
+
   "paths": {
-    "/auth/register": {
+    "/api/users/register": {
       "post": {
-        "tags": ["Auth"],
+        "tags": ["User"],
         "summary": "User registration",
         "parameters": [],
         "security": [{ "Bearer": [] }],
         "requestBody": {
-          "description": "Registration's object",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegistrationRequest"
+                "$ref": "#/components/schemas/User"
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RegistrationResponse"
-                }
-              }
-            }
+            "description": "User is created"
           },
           "400": {
-            "description": "Bad request (invalid request body)",
-            "content": {}
+            "description": "Bad request (invalid request body)"
           },
           "409": {
-            "description": "Provided email already exists",
-            "content": {}
+            "description": "Provided email already exists"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "tags": ["User"],
+        "summary": "User login",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {"email": "user@example.com", "password":"examplepassword"}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User is loggedIn"
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+          },
+          "401": {
+            "description": "Email or password is wrong"
+          },
+          "404": {
+            "description": "User is not found"
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       }
@@ -61,9 +91,9 @@
   },
   "components": {
     "schemas": {
-      "RegistrationRequest": {
+      "User": {
         "type": "object",
-        "required": ["email", "password"],
+        "required": ["email", "password", "confirm password", "name"],
         "properties": {
           "email": {
             "type": "string",
@@ -72,32 +102,19 @@
           },
           "password": {
             "type": "string",
-            "description": "User's password",
-            "example": "qwerty123"
-          }
-        }
-      },
-      "RegistrationResponse": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "email": {
-              "type": "string",
-              "description": "User's email",
-              "format": "email"
-            },
-            "userId": {
-              "type": "number",
-              "description": "User's id",
-              "example": "32143232436545474"
-            }
+            "description": "User's password"
+          },
+          "confirm password": {
+            "type": "string",
+            "description": "User's confirm password"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name"
           }
         },
-        "example": [
-          { "email": "1@gmail.com", "userId": "1" },
-          { "email": "2@gmail.com", "userId": "2" }
-        ]
+        "example":
+          {"email": "user@example.com", "password":"examplepassword", "confirm password":"examplepassword", "name": "Username"}
       }
     },
     "securitySchemes": {
