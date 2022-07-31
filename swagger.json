@@ -7,13 +7,14 @@
   },
   "consumes": ["application/json"],
   "produces": ["application/json"],
-  "servers": [{"url":"https://wallet-app-backend-project.herokuapp.com"}],
+  "servers": [{"url":"https://wallet-app-backend-project.herokuapp.com", "description":" API base URL"}],
 
   "paths": {
     "/users/register": {
       "post": {
         "tags": ["User"],
         "summary": "User registration",
+        "description": "Registering unique user",
         "parameters": [],
         "security": [{ "Bearer": [] }],
         "requestBody": {
@@ -46,6 +47,7 @@
       "post": {
         "tags": ["User"],
         "summary": "User login",
+        "description": "Authorization user",
         "parameters": [],
         "security": [{ "Bearer": [] }],
         "requestBody": {
@@ -87,6 +89,107 @@
           }
         }
       }
+    },
+    "/users/logout": {
+      "get": {
+        "tags": ["User"],
+        "summary": "User logout",
+        "description": "Logout authorized user",
+        "parameters": [
+          {
+          "in": "header",
+          "name": "Authorization",
+          "description":"Token current user",
+          "required": true,
+          "schema" : {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "204": {
+            "description": "User is loggedOut"
+          },
+          "401": {
+            "description": "The token is missing or invalid"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+         "security": [{ "Bearer": [] }]
+      }
+    },
+    "/users/current": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Current user",
+        "description": "Show current user transactions",
+        "parameters": [
+          {
+          "in": "header",
+          "name": "Authorization",
+          "description":"Token current user",
+          "required": true,
+          "schema" : {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "User found"
+          },
+          "401": {
+            "description": "The token is missing or invalid"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+         "security": [{ "Bearer": [] }]
+      }
+    },
+    "/transactions": {
+      "post": {
+        "tags": ["Transaction"],
+        "summary": "Add transaction",
+        "description": "Added one transaction",
+        "parameters": [
+          {
+          "in": "header",
+          "name": "Authorization",
+          "description":"Token current user",
+          "required": true,
+          "schema" : {
+            "type": "string"
+          }
+        }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Transaction"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Transaction added"
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+          },
+          "401": {
+            "description": "The token is missing or invalid"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -95,6 +198,10 @@
         "type": "object",
         "required": ["email", "password", "name"],
         "properties": {
+          "id": {
+            "type": "string",
+            "description": "Automatic generated user's id"
+          },
           "email": {
             "type": "string",
             "description": "User's email",
@@ -111,6 +218,36 @@
         },
         "example":
           {"email": "user@example.com", "password":"examplepassword", "name": "Username"}
+      },
+      "Transaction": {
+        "type": "object",
+        "required": ["sum", "date", "type"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Automatic generated transactions id"
+          },
+          "sum": {
+            "type": "number",
+            "description": "Transaction sum",
+            "format":"float"
+          },
+          "date": {
+            "type": "string",
+            "description": "Transaction date",
+            "format":"date"
+          },
+          "type": {
+            "type": "boolean",
+            "description": "Transaction type (income/expense)"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Transaction type (income/expense)"
+          }
+        },
+        "example":
+          {"sum": "1234.56", "date": "01.01.1970", "type":"expense"}
       }
     },
     "securitySchemes": {
