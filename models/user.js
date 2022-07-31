@@ -38,10 +38,6 @@ const userSchema = Schema(
       type: String,
       default: null,
     },
-    verificationToken: {
-      type: String,
-      required: [true, "Verify token is required"],
-    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -56,7 +52,6 @@ const userRegisterSchema = Joi.object({
     .max(63)
     .required(),
   password: Joi.string().min(6).max(12).required(),
-  confirmPassword: Joi.string().valid(Joi.ref("password")).required(),
   name: Joi.string()
     .pattern(/^[a-zа-яA-ZА-Я0-9-]+$/)
     .min(1)

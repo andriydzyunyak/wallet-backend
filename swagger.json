@@ -7,10 +7,10 @@
   },
   "consumes": ["application/json"],
   "produces": ["application/json"],
-  "servers": [{ "url": "http://localhost:3001 - API base URL" },{"url":"https://wallet-app-backend-project.herokuapp.com - API base URL"}],
+  "servers": [{"url":"https://wallet-app-backend-project.herokuapp.com - API base URL"}],
 
   "paths": {
-    "/api/users/register": {
+    "/users/register": {
       "post": {
         "tags": ["User"],
         "summary": "User registration",
@@ -42,7 +42,7 @@
         }
       }
     },
-    "/api/users/login": {
+    "/users/login": {
       "post": {
         "tags": ["User"],
         "summary": "User login",
@@ -93,7 +93,7 @@
     "schemas": {
       "User": {
         "type": "object",
-        "required": ["email", "password", "confirm password", "name"],
+        "required": ["email", "password", "name"],
         "properties": {
           "email": {
             "type": "string",
@@ -104,17 +104,13 @@
             "type": "string",
             "description": "User's password"
           },
-          "confirm password": {
-            "type": "string",
-            "description": "User's confirm password"
-          },
           "name": {
             "type": "string",
             "description": "User's name"
           }
         },
         "example":
-          {"email": "user@example.com", "password":"examplepassword", "confirm password":"examplepassword", "name": "Username"}
+          {"email": "user@example.com", "password":"examplepassword", "name": "Username"}
       }
     },
     "securitySchemes": {
