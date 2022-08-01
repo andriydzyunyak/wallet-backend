@@ -1,16 +1,18 @@
 const express = require("express");
-// const { ctrlWrapper } = require("../../helpers");
-// const { auth, validation } = require("../../middlewares");
-// const { users: ctrl } = require("../../controllers");
+const { ctrlWrapper } = require("../../helpers");
+const { auth, validation } = require("../../middlewares");
+const { transactions: ctrl } = require("../../controllers");
+const { transactionAddSchema } = require("../../models/transaction");
 
 const router = express.Router();
 
-// router.post(
-//   "/register",
-//   validation(userRegisterSchema),
-//   ctrlWrapper(ctrl.register)
-// );
-// router.post("/login", validation(userLoginSchema), ctrlWrapper(ctrl.login));
-// router.get("/logout", auth, ctrlWrapper(ctrl.logout));
+router.get("/", auth, ctrlWrapper(ctrl.listTransactions));
+
+router.post(
+  "/",
+  auth,
+  validation(transactionAddSchema),
+  ctrlWrapper(ctrl.addTransaction)
+);
 
 module.exports = router;

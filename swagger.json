@@ -227,6 +227,10 @@
             "type": "string",
             "description": "Automatic generated transactions id"
           },
+          "category": {
+            "type": "string",
+            "description": "Transaction category"
+          },
           "sum": {
             "type": "number",
             "description": "Transaction sum",
@@ -247,7 +251,7 @@
           }
         },
         "example":
-          {"sum": "1234.56", "date": "01.01.1970", "type":"expense"}
+          {"type":"expense", "category":"Food", "sum": "1234.56", "date": "01.01.1970" }
       }
     },
     "securitySchemes": {
