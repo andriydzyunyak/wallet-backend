@@ -122,8 +122,8 @@
     "/users/current": {
       "get": {
         "tags": ["User"],
-        "summary": "Current user",
-        "description": "Show current user transactions",
+        "summary": "Getting information about current user",
+        "description": "Show current user",
         "parameters": [
           {
           "in": "header",
@@ -149,6 +149,36 @@
       }
     },
     "/transactions": {
+      "get": {
+        "tags": ["Transaction"],
+        "summary": "Getting current user transactions",
+        "description": "Show current user transactions",
+        "parameters": [
+          {
+          "in": "header",
+          "name": "Authorization",
+          "description":"Token current user",
+          "required": true,
+          "schema" : {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Transactions found"
+          },
+          "401": {
+            "description": "The token is missing or invalid"
+          },
+          "404": {
+            "description": "Current user transactions is not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+         "security": [{ "Bearer": [] }]
+      },
       "post": {
         "tags": ["Transaction"],
         "summary": "Add transaction",
