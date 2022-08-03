@@ -220,6 +220,35 @@
           }
         }
       }
+    },
+    "/transactions/categories": {
+      "get": {
+        "tags": ["Transaction"],
+        "summary": "Getting transactions categories",
+        "description": "Transactions categories",
+        "parameters": [
+          {
+          "in": "header",
+          "name": "Authorization",
+          "description":"Token current user",
+          "required": true,
+          "schema" : {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Categories found"
+          },
+          "401": {
+            "description": "The token is missing or invalid"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+         "security": [{ "Bearer": [] }]
+      }
     }
   },
   "components": {

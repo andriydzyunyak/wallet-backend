@@ -1,0 +1,57 @@
+[
+   {
+      "id":"1",
+      "category": "Basic expenses",
+      "type": false
+   },
+   {
+      "id":"2",
+      "category": "Products",
+      "type": false
+   },
+   {
+      "id":"3",
+      "category": "Car",
+      "type": false
+   },
+   { 
+      "id":"4",
+      "category": "Self care",
+      "type": false
+   },
+   { 
+      "id":"5",
+      "category": "Child care",
+      "type": false
+   },
+   {
+      "id":"6",
+      "category": "Household products",
+      "type": false
+   },
+   {  
+      "id":"7",
+      "category": "Education",
+      "type": false
+   },
+   {  
+      "id":"8",
+      "category": "Leisure",
+      "type": false
+   },
+   {
+      "id":"9",
+      "category": "Other expenses",
+      "type": false
+   },
+   {  
+      "id":"10",
+      "category": "Regular Income",
+      "type": true
+   },
+   {
+      "id":"11",
+      "category": "Irregular income",
+      "type": true
+   }
+]

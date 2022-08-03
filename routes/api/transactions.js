@@ -15,4 +15,6 @@ router.post(
   ctrlWrapper(ctrl.addTransaction)
 );
 
+router.get("/categories", auth, ctrlWrapper(ctrl.listCategories));
+
 module.exports = router;
