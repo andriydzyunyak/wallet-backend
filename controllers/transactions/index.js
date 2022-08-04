@@ -1,13 +1,11 @@
 const addTransaction = require("./addTransaction");
 const listTransactions = require("./listTransactions");
 const listCategories = require("./listCategories");
-const listTransactionsForMonth = require("./listTransactionsForMonth");
-const listTransactionsForYear = require("./listTransactionsForYear");
+const transactionsDetails = require("./transactionsDetails");
 
 module.exports = {
   addTransaction,
   listTransactions,
   listCategories,
-  listTransactionsForMonth,
-  listTransactionsForYear,
+  transactionsDetails,
 };

@@ -41,9 +41,15 @@ const transactionAddSchema = Joi.object({
   comment: Joi.string(),
 });
 
+const transactionsDetailsSchema = Joi.object({
+  year: Joi.string().required(),
+  month: Joi.string(),
+});
+
 const Transaction = model("transaction", transactionsSchema);
 
 module.exports = {
   Transaction,
   transactionAddSchema,
+  transactionsDetailsSchema,
 };
