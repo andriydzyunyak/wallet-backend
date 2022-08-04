@@ -15,6 +15,10 @@ router.post(
   ctrlWrapper(ctrl.addTransaction)
 );
 
+router.post("/month", auth, ctrlWrapper(ctrl.listTransactionsForMonth));
+
+router.post("/year", auth, ctrlWrapper(ctrl.listTransactionsForYear));
+
 router.get("/categories", auth, ctrlWrapper(ctrl.listCategories));
 
 module.exports = router;
