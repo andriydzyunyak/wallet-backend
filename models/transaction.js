@@ -6,7 +6,7 @@ const transactionsSchema = Schema(
   {
     category: {
       type: String,
-      required: false,
+      required: true,
     },
     type: {
       type: Boolean,
@@ -28,6 +28,9 @@ const transactionsSchema = Schema(
     owner: {
       type: Schema.Types.ObjectId,
       ref: "user",
+    },
+    balance: {
+      type: Number,
     },
   },
   { versionKey: false, timestamps: true }
