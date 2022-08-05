@@ -38,6 +38,10 @@ const userSchema = Schema(
       type: String,
       default: null,
     },
+    balance: {
+      type: Number,
+      default: 0
+    }
   },
   { versionKey: false, timestamps: true }
 );
