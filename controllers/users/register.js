@@ -19,7 +19,7 @@ const register = async (req, res) => {
   const payload = {
     id: result._id,
   };
-  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
+  const token = jwt.sign(payload, SECRET_KEY);
   await User.findByIdAndUpdate(result._id, { token });
   res.status(201).json({
     data: {

@@ -6,7 +6,7 @@ const transactionsSchema = Schema(
   {
     category: {
       type: String,
-      required: false,
+      required: true,
     },
     type: {
       type: Boolean,
