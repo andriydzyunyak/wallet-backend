@@ -66,7 +66,7 @@
                     "type": "string"
                   }
                 },
-                "example": {"email": "user@example.com", "password":"examplepassword"}
+                "example": {"email": "string", "password":"string"}
               }
             }
           }
@@ -249,6 +249,57 @@
         },
          "security": [{ "Bearer": [] }]
       }
+    },
+    "/transactions/details": {
+      "post": {
+        "tags": ["Transaction"],
+        "summary": "Getting transactions details",
+        "description": "Transactions details",
+        "parameters": [
+          {
+          "in": "header",
+          "name": "Authorization",
+          "description":"Token current user",
+          "required": true,
+          "schema" : {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["year"],
+                "properties": {
+                  "month": {
+                    "type": "string",
+                    "description": "Number of month: from 1 to 12"
+                  },
+                  "year": {
+                    "type": "string",
+                    "description": "Year in format yyyy, example, 2022"
+                  }
+                },
+                "example": {"month": "m", "year":"yyyy"}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transactions found"
+          },
+          "401": {
+            "description": "The token is missing or invalid"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+         "security": [{ "Bearer": [] }]
+      }
     }
   },
   "components": {
@@ -280,7 +331,7 @@
       },
       "Transaction": {
         "type": "object",
-        "required": ["sum", "date", "type"],
+        "required": ["category", "sum", "date", "type"],
         "properties": {
           "id": {
             "type": "string",
@@ -302,15 +353,15 @@
           },
           "type": {
             "type": "boolean",
-            "description": "Transaction type (income/expense)"
+            "description": "Transaction type (true: income/false: expense)"
           },
           "comment": {
             "type": "string",
-            "description": "Transaction type (income/expense)"
+            "description": "Transaction comment"
           }
         },
         "example":
-          {"type":"expense", "category":"Food", "sum": "1234.56", "date": "01.01.1970" }
+          {"type":"true or false", "category":"string", "sum": "000.00", "date": "mm.dd.yyyy", "comment": "string" }
       }
     },
     "securitySchemes": {
