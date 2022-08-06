@@ -37,7 +37,7 @@ const transactionsSchema = Schema(
 );
 
 const transactionAddSchema = Joi.object({
-  type: Joi.bool().required(false),
+  type: Joi.bool().required(),
   category: Joi.string(),
   sum: Joi.number().precision(2).required(),
   date: Joi.date().default(Date.now).max("now").required(),
