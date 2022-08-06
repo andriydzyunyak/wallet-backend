@@ -6,7 +6,6 @@ const addTransaction = async (req, res) => {
 
   if (req.body.type === true) {
     const balance = Number(req.body.sum) + Number(req.user.balance);
-    console.log(balance);
 
     await User.findByIdAndUpdate(_id, { balance });
 
