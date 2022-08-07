@@ -8,9 +8,9 @@ const addTransaction = async (req, res) => {
     const balance = Number(req.body.sum) + Number(req.user.balance);
 
     await User.findByIdAndUpdate(_id, { balance });
-
     const result = await Transaction.create({
       ...req.body,
+
       owner: _id,
       balance,
     });
@@ -26,10 +26,17 @@ const addTransaction = async (req, res) => {
 
   await User.findByIdAndUpdate(_id, { balance });
 
-  const result = await Transaction.create({ ...req.body, owner: _id, balance });
+  const result = await Transaction.create({
+    ...req.body,
+    owner: _id,
+    balance,
+  });
   res.status(201).json({
     data: {
-      result,
+      result: {
+        ...result,
+        date: result.date.toString(),
+      },
     },
   });
 };
