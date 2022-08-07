@@ -13,7 +13,7 @@ const transactionsDetails = async (req, res) => {
       Number(req.body.month)
     );
 
-    const result = await Transaction.aggregate([
+    const categories = await Transaction.aggregate([
       {
         $match: {
           owner: Object(_id),
@@ -38,6 +38,33 @@ const transactionsDetails = async (req, res) => {
       },
     ]);
 
+    const totals = await Transaction.aggregate([
+      {
+        $match: {
+          owner: Object(_id),
+          date: {
+            $gte: chosenMonth,
+            $lt: afterChosenMonth,
+          },
+        },
+      },
+      {
+        $group: {
+          _id: "$type",
+          totalSum: { $sum: "$sum" },
+        },
+      },
+      {
+        $project: {
+          type: "$_id",
+          totalSum: 1,
+          _id: 0,
+        },
+      },
+    ]);
+
+    const result = [...categories, ...totals];
+
     res.json({
       data: {
         result,
@@ -49,7 +76,7 @@ const transactionsDetails = async (req, res) => {
   const chosenYear = new Date(Number(req.body.year), 0);
   const afterChosenYear = new Date(Number(req.body.year) + 1, 0);
 
-  const result = await Transaction.aggregate([
+  const categories = await Transaction.aggregate([
     {
       $match: {
         owner: Object(_id),
@@ -73,6 +100,33 @@ const transactionsDetails = async (req, res) => {
       },
     },
   ]);
+
+  const totals = await Transaction.aggregate([
+    {
+      $match: {
+        owner: Object(_id),
+        date: {
+          $gte: chosenYear,
+          $lt: afterChosenYear,
+        },
+      },
+    },
+    {
+      $group: {
+        _id: "$type",
+        totalSum: { $sum: "$sum" },
+      },
+    },
+    {
+      $project: {
+        type: "$_id",
+        totalSum: 1,
+        _id: 0,
+      },
+    },
+  ]);
+
+  const result = [...categories, ...totals];
 
   res.json({
     data: {
