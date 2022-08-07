@@ -7,7 +7,9 @@ const listTransactions = async (req, res) => {
   const result = await Transaction.find({ owner: _id }, "", {
     skip,
     limit: Number(limit),
-  }).populate("owner", "name");
+  })
+    .sort({ date: -1 })
+    .populate("owner", "name");
   res.json({
     data: {
       result,

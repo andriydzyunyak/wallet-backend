@@ -19,6 +19,7 @@ const transactionsSchema = Schema(
     },
     comment: {
       type: String,
+      default: "",
     },
     date: {
       type: Date,
