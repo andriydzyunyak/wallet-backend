@@ -2,56 +2,67 @@
    {
       "id":"1",
       "category": "Basic expenses",
+      "color": "#FED057",
       "type": false
    },
    {
       "id":"2",
       "category": "Products",
+      "color": "#FFD8D0",
       "type": false
    },
    {
       "id":"3",
       "category": "Car",
+      "color": "#FD9498",
       "type": false
    },
    { 
       "id":"4",
       "category": "Self care",
+      "color": "#C5BAFF",
       "type": false
    },
    { 
       "id":"5",
       "category": "Child care",
+      "color": "#6E78E8",
       "type": false
    },
    {
       "id":"6",
       "category": "Household products",
+      "color": "#4A56E2",
       "type": false
    },
    {  
       "id":"7",
       "category": "Education",
+      "color": "#81E1FF",
       "type": false
    },
    {  
       "id":"8",
       "category": "Leisure",
+      "color": "#24CCA7",
       "type": false
    },
    {
       "id":"9",
       "category": "Other expenses",
+      "color": "#00AD84",
       "type": false
    },
    {  
       "id":"10",
       "category": "Regular Income",
+      "color": "#24cca7",
       "type": true
    },
    {
       "id":"11",
       "category": "Irregular income",
+      "color": "#24cca7",
       "type": true
    }
 ]
