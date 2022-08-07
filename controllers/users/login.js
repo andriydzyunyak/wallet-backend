@@ -16,13 +16,14 @@ const login = async (req, res) => {
   };
   const token = jwt.sign(payload, SECRET_KEY);
   await User.findByIdAndUpdate(user._id, { token });
-  const { name } = user;
+  const { name, balance } = user;
   res.json({
     data: {
       token,
       user: {
         email,
         name,
+        balance,
       },
     },
   });
