@@ -55,7 +55,7 @@ const userRegisterSchema = Joi.object({
     .min(10)
     .max(63)
     .required(),
-  password: Joi.string().min(6).max(12).required(),
+  password: Joi.string().min(6).max(16).required(),
   name: Joi.string()
     .pattern(/^[a-zа-яA-ZА-Я0-9-]+$/)
     .min(1)
