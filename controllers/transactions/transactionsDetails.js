@@ -99,7 +99,7 @@ const transactionsDetails = async (req, res) => {
         _id: 0,
       },
     },
-  ]);
+  ]).sort({category: 'asc'});
 
   const totals = await Transaction.aggregate([
     {
